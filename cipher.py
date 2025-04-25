@@ -73,7 +73,7 @@ def rail_fence_decode(string, key):
     for r in range(key):
         for c in range(len(string)):
             if pattern[c] == r:
-                rails[r][c] += string[i]
+                rails[r] += string[i]
                 i += 1
 
     # decoded message in pattern
