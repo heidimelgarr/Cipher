@@ -59,7 +59,6 @@ def rail_fence_decode(string, key):
     rails = ['' for _ in range(key)]
     direction = 1
     curr_rail = 0
-    rail_point = [0] * key # Initialize
 
     # zigzag pattern
     pattern = [None] * len(string)
@@ -74,17 +73,15 @@ def rail_fence_decode(string, key):
     for r in range(key):
         for c in range(len(string)):
             if pattern[c] == r:
-                rails[r] += string[i]
+                rails[r][c] += string[i]
                 i += 1
 
     # decoded message in pattern
     decoded = ''
-    rail_point = [0] * key # reset
-    for i in range(len(string)):
-        rail = pattern[i]
-        if rail_point[rail] < len(rails[rail]):
-            decoded += rails[rail][rail_point[rail]]
-            rail_point[rail] += 1
+    for c in range(len(string)):
+        for r in range(key):
+            if rails[r][c] != '': # reading only non-empty slots
+                decoded += rails[r][c]
     return decoded
 
 
