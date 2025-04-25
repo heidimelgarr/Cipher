@@ -81,9 +81,10 @@ def rail_fence_decode(string, key):
     decoded = ''
     rail_point = [0] * key # reset
     for i in range(len(string)):
-        if rail_point[pattern[i]] < len(rails[pattern[i]]):
-            decoded += rails[pattern[i]][rail_point[pattern[i]]]
-            rail_point[pattern[i]] += 1  # Move to the next position
+        rail = pattern[i]
+        if rail_point[rail] < len(rails[rail]):
+            decoded += rails[rail][rail_point[rail]]
+            rail_point[rail] += 1
     return decoded
 
 
