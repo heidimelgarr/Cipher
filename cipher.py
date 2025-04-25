@@ -52,7 +52,7 @@ def rail_fence_decode(string, key):
     post: function returns a single string that is decoded with
         rail fence algorithm
     """
-    if key == 1:
+    if key == 1 or key == len(string):
         return string
 
     pattern = [None] * len(string)
@@ -62,7 +62,7 @@ def rail_fence_decode(string, key):
     # zigzag pattern
     for i in range(len(string)):
         pattern[i] = curr_rail
-        if curr_rail in (0, key - 1):
+        if curr_rail in {0, key - 1}:
             direction = -direction
         curr_rail += direction
 
@@ -80,7 +80,7 @@ def rail_fence_decode(string, key):
     decoded = ''
     rail_point = [0] * key
     for c in range(len(string)):
-        rail = pattern[i]
+        rail = pattern[c]
         if rail_point[rail] < len(rails[rail]):
             decoded += rails[rail][rail_point[rail]]
             rail_point[rail] += 1
